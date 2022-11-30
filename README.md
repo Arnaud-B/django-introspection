@@ -27,3 +27,37 @@ Put in your wsgi.py file
   ```
 
 And you get file contains your models and attributes in your project root
+
+
+## File format
+
+Example of information file
+
+
+```json
+{
+  "models": 11,
+  "collections": {
+    "Permission": {
+      "path": "django.contrib.auth.models",
+      "verbose_name": "permission",
+      "db_table": "auth_permission",
+      "fields": {
+        "id": "AutoField",
+        "name": "CharField",
+        "content_type": "ForeignKey",
+        "codename": "CharField"
+      },
+      ...
+    }
+  }
+}
+```
+
+## More informations
+
+time estimated : ~2 hours
+
+testing on 2 medium projects and one large project
+
+in V0.2 : unit test on external projects

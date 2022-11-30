@@ -16,20 +16,20 @@ def models_introspection(filename="forestadminschema.json"):
     no_update = no_same_models(filename, len(models))
     if not no_update:
         return
-    attr_models = {}
-    for m in models:
-        meta = m._meta
-        attr_models[meta.object_name] = {
-            'path': m.__module__, 'verbose_name': str(meta.verbose_name).encode('utf8').decode('utf8'),
-            'db_table': meta.db_table, 'fields': {}
+    attr_models = {
+        'models': len(models), 'collections': {
+            m._meta.object_name: {
+                'path': m.__module__,
+                'verbose_name': str(m._meta.verbose_name),  # verbose_name is a proxy variable so we cast this value
+                'db_table': m._meta.db_table, 'fields': {
+                    f.name: f.get_internal_type() for f in m._meta.fields
+                }
+            } for m in models
         }
-        fields = meta.fields
-        for f in fields:
-            attr_models[meta.object_name]['fields'][f.name] = f.get_internal_type()
-    models_json = json.dumps({'models': len(models), 'collections': attr_models}, indent=2)
+    }
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write(models_json)
-    return models_json
+        f.write(json.dumps(attr_models, indent=2))
+    return attr_models
 
 
 # Check if file exist
