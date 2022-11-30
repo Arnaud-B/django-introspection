@@ -1,4 +1,4 @@
-# django-introspection Package
+# django_introspection Package
 
 Introspect your Django project models
 
@@ -8,7 +8,7 @@ Introspect your Django project models
 
 ## Usage
 
-Put ```introspection``` in your settings
+Put ```django_introspection``` in your settings
 
    ```python
   INSTALLED_APPS = [
