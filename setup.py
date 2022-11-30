@@ -5,7 +5,7 @@ setup(
     version='0.1',
     packages=['django_introspection'],
     include_package_data=True,
-    license='MIT',
+    license='',
     description='Django app to introspect models',
     long_description='README.md',
     url='https://github.com/Arnaud-B/django-introspection',
